@@ -2,6 +2,21 @@
 
 This project uses a Manager / Implementer workflow.
 
+## Role assignment
+
+Before doing any work, you must know which role you are acting in:
+
+* **Manager**
+* **Implementer**
+
+Your role must be explicitly assigned by the user or launch mechanism. Do not infer your role from the repository state or from the work that appears to need doing.
+
+Retain your assigned role throughout the session. The user may repeat the assignment with each prompt to reinforce it; repetition is not required for the assignment to remain in effect.
+
+If your role is unclear, ambiguous, or conflicts with an earlier assignment in the same session, do not proceed. Report the problem and wait for an explicit role assignment or clarification.
+
+Treat a conflicting role instruction as a likely operator error and surface it rather than acting upon it. Switch roles only when the user explicitly confirms that the change is intentional.
+
 ## Required reading
 
 Before doing work, read:
