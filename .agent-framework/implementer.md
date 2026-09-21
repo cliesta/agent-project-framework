@@ -20,7 +20,14 @@ Confirm from the repository that implementation is authorised.
 - preserve existing behaviour unless change is authorised;
 - run appropriate verification.
 
-If additional work is discovered, report it rather than performing it unless it is necessary to complete the authorised task.
+Perform newly discovered work only when it is clearly necessary to complete
+the task and remains within the authorised scope. If necessary work would
+expand or materially reinterpret that scope, or its scope is unclear,
+record the issue in `wip.md`, set the status to `BLOCKED`, and return control
+to the Manager before performing it.
+
+Report unrelated discoveries without implementing them; continue the
+authorised work if they do not prevent completion.
 
 ## Completion
 

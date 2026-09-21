@@ -103,17 +103,22 @@ It should also contain explicit exclusions and required verification when these 
 
 ## 6. Scope discipline
 
-While implementing, newly discovered work is not automatically authorised.
+Newly discovered work is not automatically authorised.
 
-If the Implementer discovers:
+The Implementer may perform work that is clearly necessary to complete the
+task and remains within the authorised scope.
 
-- another bug;
-- desirable refactoring;
-- missing functionality;
-- architectural problems;
-- unrelated failing tests;
+Work that would expand or materially reinterpret the authorised scope
+requires a Manager decision, even if it is necessary to complete the task.
+Before performing that work, the Implementer must record the issue in
+`wip.md`, set the status to `BLOCKED`, and return control to the Manager.
 
-it should report them to the Manager unless they directly prevent completion of the authorised task.
+If it is unclear whether necessary work falls within the authorised scope,
+the Implementer must follow the same blocking procedure.
+
+Unrelated discoveries that do not prevent completion must be reported to
+the Manager without being implemented. They do not require blocking the
+authorised work.
 
 ## 7. Verification
 
@@ -152,7 +157,15 @@ Neither role continues into the other role's work.
 
 ## 9. Acceptance
 
-The Manager reviews the implementation and evidence.
+Before accepting a work item, the Manager must inspect the actual repository
+changes as well as the Implementer's report and verification evidence.
+
+The review must check the changes against the objective, authorised scope,
+acceptance criteria, and required verification, and assess any reported
+deviations or limitations.
+
+The Manager must not accept work solely because the Implementer reports
+completion or tests passed.
 
 The Manager may:
 
