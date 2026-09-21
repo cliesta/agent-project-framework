@@ -2,6 +2,10 @@
 
 This project uses a Manager / Implementer workflow.
 
+## Applicability
+
+These instructions govern project execution using this framework. If the user explicitly designates a session as framework review or development outside that workflow, the Manager/Implementer role, authorisation, and acceptance requirements do not apply to that session. Follow the user-defined role and scope; do not infer this exception yourself.
+
 ## Role assignment
 
 Before doing any work, you must know which role you are acting in:
