@@ -49,14 +49,14 @@ The Implementer must not:
 `wip.md` is the authoritative record of one active work item.
 
 The Manager owns the work item's objective, authorised scope, acceptance
-criteria, authorisation, and review. The Implementer owns its progress,
+criteria, review baseline, authorisation, and review. The Implementer owns its progress,
 blockers, and completion report.
 
 The Implementer must not modify its own authorised scope or other
 Manager-owned instructions.
 
 Implementation may proceed only when the status is `AUTHORISED` and the
-recorded objective, scope, and acceptance criteria are sufficiently complete
+recorded objective, scope, acceptance criteria, and review baseline are sufficiently complete
 and non-contradictory to carry out the work. A status value alone does not
 authorise implementation.
 
@@ -132,13 +132,42 @@ being created, leave the accepted record in `wip.md`. Archiving and creating a
 new work record are Manager planning work and do not authorise implementation
 by themselves. Keep the installed template clean for subsequent rollovers.
 
+### 4.3. Review baseline
+
+Before first authorising a work item, the Manager records a review baseline
+in `wip.md` containing:
+
+- the starting commit ID when one exists, or an explicit statement that the
+  repository has no commits or does not use Git;
+- pre-existing changes, including staged, unstaged, and untracked files when
+  using Git, or an explicit statement that there are none;
+- how the Manager will identify this work item's changes during review.
+
+A commit ID is sufficient for a clean Git starting state. If pre-existing
+changes overlap the work, preserve enough before-state evidence to separate
+them, such as a saved patch and copies of relevant untracked files. Without
+a usable commit, use a snapshot of the relevant starting files or another
+explicit comparison method. Record where supporting evidence is retained;
+a list of modified filenames alone does not preserve their starting contents.
+Account for Manager planning edits separately from Implementer changes.
+
+The baseline remains the original starting point through blocking, rework,
+and further verification. Preserve its evidence until acceptance so review
+covers the entire item, not just the latest revision. If evidence is missing
+or the comparison is ambiguous, the Manager must resolve that limitation
+before accepting the item. A new work item receives a new baseline.
+
+This does not require a branch, a commit, or a clean working tree. Do not
+discard existing changes to create a baseline.
+
 ## 5. Every implementation request must contain
 
 At minimum:
 
 - an objective;
 - authorised scope;
-- acceptance criteria.
+- acceptance criteria;
+- a review baseline.
 
 It should also contain explicit exclusions and required verification when these matter.
 
@@ -185,6 +214,8 @@ When authorised work is complete, the Implementer records a completion
 report summarising:
 
 - what changed;
+- files added, modified, deleted, or renamed, and any difficulty separating
+  the item's changes from pre-existing changes;
 - verification performed;
 - results;
 - deviations from the authorised scope;
@@ -200,6 +231,9 @@ Neither role continues into the other role's work.
 
 Before accepting a work item, the Manager must inspect the actual repository
 changes as well as the Implementer's report and verification evidence.
+Use the recorded review baseline and its supporting evidence to distinguish
+the item's changes from pre-existing changes, covering the original work and
+all rework.
 
 The review must check the changes against the objective, authorised scope,
 acceptance criteria, and required verification, and assess any reported

@@ -12,6 +12,12 @@ Read:
 
 Confirm from the repository that implementation is authorised.
 
+Read the Manager's review baseline and preserve the evidence needed to
+distinguish this item's changes from pre-existing changes. Do not reset the
+baseline during rework. If the baseline is missing or cannot support that
+comparison, record the issue in `wip.md`, set `BLOCKED`, and return control to
+the Manager before making implementation changes.
+
 ## During implementation
 
 - stay within scope;
@@ -40,6 +46,12 @@ Provide an implementation report containing:
 ### Summary
 
 What changed?
+
+### Changed files
+
+List files added, modified, deleted, or renamed by this work item, including
+rework. Explain any difficulty separating these changes from pre-existing
+changes; reference supporting comparison evidence where needed.
 
 ### Verification
 

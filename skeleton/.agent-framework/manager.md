@@ -21,7 +21,7 @@ authorising implementation:
    rules are sufficient to authorise the first work item. Nonessential decisions
    may remain explicitly undecided;
 5. record the first bounded work item in `wip.md`, including its ID, title,
-   objective, authorised scope, acceptance criteria, and any required
+   objective, authorised scope, acceptance criteria, review baseline, and any required
    verification. Set its status to `AUTHORISED` and hand off to the Implementer
    as described in `workflow.md`.
 
@@ -42,7 +42,9 @@ Before authorising implementation:
 2. understand the problem;
 3. choose a bounded unit of work;
 4. define acceptance criteria;
-5. specify required verification where necessary.
+5. specify required verification where necessary;
+6. record the review baseline before handing off, following `workflow.md`
+   section 4.3.
 
 ## Work requests
 
@@ -64,6 +66,12 @@ What may be changed?
 
 How will we know the work is complete?
 
+### Review baseline
+
+What is the starting commit, what changes already exist, and how will this
+item's changes be distinguished from them? Follow `workflow.md` section 4.3,
+including when there is no commit or no Git repository.
+
 Optional sections:
 
 ### Out of scope
@@ -77,7 +85,9 @@ What evidence must the Implementer provide?
 ## Review
 
 Before accepting a work item, inspect the actual repository changes as well
-as the Implementer's report and verification evidence. Check:
+as the Implementer's report and verification evidence. Use the recorded review
+baseline to identify the full work-item changes, including any rework, and
+separate them from pre-existing changes. Check:
 
 - whether the changes achieve the objective;
 - whether the changes stay within the authorised scope;

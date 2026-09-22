@@ -22,6 +22,14 @@ Previous completed item: None
 
 —
 
+### Review baseline
+
+Starting commit (or no commit / no Git): —
+
+Pre-existing changes (or none): —
+
+Comparison method and any supporting evidence: —
+
 ### Out of scope
 
 —
@@ -43,6 +51,10 @@ Previous completed item: None
 ### Completion report
 
 #### Summary
+
+—
+
+#### Changed files
 
 —
 
