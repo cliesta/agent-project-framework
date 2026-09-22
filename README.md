@@ -52,3 +52,15 @@ Only the Manager may cancel work, recording the reason and what happened to
 any partial changes before setting `CANCELLED`. Cancellation does not accept
 those changes or permit automatic reversal; cleanup requires a new authorised
 work item. Cancelled records are archived under the same rules as accepted ones.
+
+## Testing
+
+Run the installer regression tests from the framework repository root:
+
+```sh
+python3 tests/test_bootstrap.py
+```
+
+The tests require Bash and Python 3, with no third-party packages. They install
+into temporary directories, verify the installed payload and clean WIP
+template, and check that rejected installations preserve existing contents.
