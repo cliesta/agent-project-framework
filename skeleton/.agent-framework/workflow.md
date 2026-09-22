@@ -22,6 +22,13 @@ The Manager:
 
 Only the Manager may authorise new implementation work.
 
+The Manager owns initialization and maintenance of `project.md` and
+`project-rules.md`. This and the Manager-owned portions of `wip.md` are planning
+work, not implementation, and do not require implementation authorisation.
+Follow the initialization procedure in `manager.md` before authorising the
+first work item. Project status `INITIALISED` does not replace work-item
+authorisation in `wip.md`.
+
 ## 3. Implementer authority
 
 The Implementer may:
