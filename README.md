@@ -2,6 +2,8 @@
 
 A reusable Manager / Implementer workflow for agent-assisted projects.
 
+Known limitations and deferred improvements are tracked in [ISSUES.md](ISSUES.md).
+
 Install into a new project directory:
 
 ```sh
