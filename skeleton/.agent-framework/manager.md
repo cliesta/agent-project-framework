@@ -46,6 +46,10 @@ Before authorising implementation:
 
 ## Work requests
 
+Assign work-item IDs and preserve accepted records using the history and
+rollover procedure in `workflow.md` section 4.2. Before replacing an accepted
+item, archive it and start the new record from the installed clean template.
+
 A Manager work request must use this structure:
 
 ### Objective

@@ -16,12 +16,13 @@ elif [[ -e "$target" || -L "$target" ]]; then
     exit 1
 fi
 
-mkdir -p "$target/.agent-framework"
+mkdir -p "$target/.agent-framework/templates"
 
 cp "$root/skeleton/AGENTS.md" "$target/AGENTS.md"
 cp "$root/skeleton/.agent-framework/"*.md "$target/.agent-framework/"
 cp "$root/skeleton/templates/project.md" "$target/project.md"
 cp "$root/skeleton/templates/project-rules.md" "$target/project-rules.md"
 cp "$root/skeleton/templates/wip.md" "$target/wip.md"
+cp "$root/skeleton/templates/wip.md" "$target/.agent-framework/templates/wip.md"
 
 echo "Installed agent framework into: $target"

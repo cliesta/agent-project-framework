@@ -6,6 +6,8 @@ ID: —
 Title: —
 Status: UNAUTHORISED
 
+Previous completed item: None
+
 ## Manager authorisation
 
 ### Objective

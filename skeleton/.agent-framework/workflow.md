@@ -98,6 +98,40 @@ status to `AUTHORISED`.
 Acceptance does not authorise further implementation. Any subsequent work
 requires a new explicit Manager authorisation.
 
+### 4.2. Work-item history and rollover
+
+The Manager owns work-item IDs, the previous-completed-item link, and rollover.
+Assign each new work item a unique, filename-safe ID using letters, digits,
+hyphens, or underscores (for example, `work-001`). Never reuse an ID from an
+earlier item. Rework and unblocking retain the current item's ID and record.
+
+Before replacing an `ACCEPTED` item with a new work item, the Manager must:
+
+1. ensure `wip.md` contains the complete completion report, review decision,
+   and `ACCEPTED` status;
+2. create `work-history/` if needed and copy the complete, unchanged `wip.md`
+   to `work-history/<ID>.md`. Never overwrite or edit an existing history
+   record. If the destination already exists, proceed only after verifying
+   that it is identical to the current accepted record; otherwise stop and
+   report the conflict;
+3. verify the archive matches the accepted record before replacing `wip.md`.
+   If archiving fails, leave `wip.md` intact;
+4. create the next `wip.md` from `.agent-framework/templates/wip.md`, assigning
+   a new unique ID and setting `Previous completed item` to a Markdown link
+   such as `[work-001](work-history/work-001.md)`. Do not carry forward the
+   previous item's authorisation, progress, blockers, report, or review;
+5. record the new authorisation and set `AUTHORISED` only when the normal
+   authorisation requirements are met. Until then, keep `UNAUTHORISED`.
+
+The first item has `Previous completed item: None`. Archived files are exact
+snapshots of the former root-level `wip.md`; paths recorded within those
+snapshots refer to the project root.
+
+Do not replace an unfinished item to start another one. When no next item is
+being created, leave the accepted record in `wip.md`. Archiving and creating a
+new work record are Manager planning work and do not authorise implementation
+by themselves. Keep the installed template clean for subsequent rollovers.
+
 ## 5. Every implementation request must contain
 
 At minimum:

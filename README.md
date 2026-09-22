@@ -35,3 +35,15 @@ Once the Manager hands off an `AUTHORISED` item, open an Implementer session:
 When the item is `READY_FOR_REVIEW`, return to the Manager for review. Handoff
 messages do not launch another agent; you must start or resume the appropriate
 session. The project status alone does not authorise implementation.
+
+## Starting the next work item
+
+Before replacing an accepted item, the Manager preserves its complete record
+in `work-history/<ID>.md`, without overwriting existing history. The next
+`wip.md` starts from the clean template installed at
+`.agent-framework/templates/wip.md`, receives a new unique ID, and links to
+the previous completed item. It requires a fresh Manager authorisation.
+
+If no next item is needed, the accepted record stays in `wip.md`. Rework stays
+in the current record with the same ID. The detailed rollover procedure is in
+`.agent-framework/workflow.md` in the installed project.
