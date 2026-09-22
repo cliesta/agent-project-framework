@@ -18,7 +18,7 @@ The Manager:
 - defines the objective and acceptance criteria;
 - authorises implementation;
 - reviews the Implementer's report;
-- accepts the work, requests rework, or defines the next milestone.
+- accepts or cancels the work, requests rework, or defines the next milestone.
 
 Only the Manager may authorise new implementation work.
 
@@ -80,6 +80,10 @@ When review requires rework or further verification:
 
 `READY_FOR_REVIEW → AUTHORISED`
 
+When the Manager decides to abandon a work item:
+
+`UNAUTHORISED | AUTHORISED | BLOCKED | READY_FOR_REVIEW → CANCELLED`
+
 Status ownership and meaning:
 
 - `UNAUTHORISED`: initial state; no implementation is authorised.
@@ -90,45 +94,68 @@ Status ownership and meaning:
 - `READY_FOR_REVIEW`: set by the Implementer after completing the authorised
   work and recording its completion report; hands control to the Manager.
 - `ACCEPTED`: set only by the Manager after review; closes the work item.
+- `CANCELLED`: set only by the Manager after recording the cancellation reason
+  and the disposition of any partial changes; closes the item without acceptance
+  and ends its implementation authorisation.
 
 To unblock work or request rework or further verification, the Manager
 records its decision, updates the authorisation as needed, and sets the
 status to `AUTHORISED`.
 
-Acceptance does not authorise further implementation. Any subsequent work
+Acceptance or cancellation does not authorise further implementation. Any subsequent work
 requires a new explicit Manager authorisation.
+
+Before cancelling an item whose Implementer is still active, arrange for it
+to stop and confirm that it has stopped before editing the work record. The
+prohibition on concurrent Manager/Implementer edits still applies.
+
+The Manager records the cancellation decision and reason under Manager review
+in `wip.md`. Under `Partial changes on cancellation`, record what changes
+remain, their verification state and any uncertainty, and whether they are
+being retained or need separately authorised follow-up. Explicitly record
+when no implementation changes were made. Preserve existing progress and
+reports; cancellation does not require a fabricated completion report or
+successful verification.
+
+Cancellation does not accept partial work or authorise reverting, deleting,
+or cleaning it up. Any such implementation requires a new bounded work item
+after rollover. Include retained partial changes in the next item's review
+baseline. `ACCEPTED` and `CANCELLED` are terminal states; further work receives
+a new ID rather than reopening or relabelling a closed item.
 
 ### 4.2. Work-item history and rollover
 
-The Manager owns work-item IDs, the previous-completed-item link, and rollover.
+The Manager owns work-item IDs, the previous-closed-item link, and rollover.
 Assign each new work item a unique, filename-safe ID using letters, digits,
 hyphens, or underscores (for example, `work-001`). Never reuse an ID from an
 earlier item. Rework and unblocking retain the current item's ID and record.
 
-Before replacing an `ACCEPTED` item with a new work item, the Manager must:
+Before replacing an `ACCEPTED` or `CANCELLED` item with a new work item, the Manager must:
 
-1. ensure `wip.md` contains the complete completion report, review decision,
-   and `ACCEPTED` status;
+1. ensure `wip.md` contains the closing decision and status. An accepted item
+   must contain its complete completion report and review decision; a cancelled
+   item must contain its cancellation reason and partial-change disposition,
+   along with any existing Implementer records;
 2. create `work-history/` if needed and copy the complete, unchanged `wip.md`
    to `work-history/<ID>.md`. Never overwrite or edit an existing history
    record. If the destination already exists, proceed only after verifying
-   that it is identical to the current accepted record; otherwise stop and
+   that it is identical to the current closed record; otherwise stop and
    report the conflict;
-3. verify the archive matches the accepted record before replacing `wip.md`.
+3. verify the archive matches the closed record before replacing `wip.md`.
    If archiving fails, leave `wip.md` intact;
 4. create the next `wip.md` from `.agent-framework/templates/wip.md`, assigning
-   a new unique ID and setting `Previous completed item` to a Markdown link
+   a new unique ID and setting `Previous closed item` to a Markdown link
    such as `[work-001](work-history/work-001.md)`. Do not carry forward the
    previous item's authorisation, progress, blockers, report, or review;
 5. record the new authorisation and set `AUTHORISED` only when the normal
    authorisation requirements are met. Until then, keep `UNAUTHORISED`.
 
-The first item has `Previous completed item: None`. Archived files are exact
+The first item has `Previous closed item: None`. Archived files are exact
 snapshots of the former root-level `wip.md`; paths recorded within those
 snapshots refer to the project root.
 
 Do not replace an unfinished item to start another one. When no next item is
-being created, leave the accepted record in `wip.md`. Archiving and creating a
+being created, leave the closed record in `wip.md`. Archiving and creating a
 new work record are Manager planning work and do not authorise implementation
 by themselves. Keep the installed template clean for subsequent rollovers.
 
@@ -152,7 +179,7 @@ a list of modified filenames alone does not preserve their starting contents.
 Account for Manager planning edits separately from Implementer changes.
 
 The baseline remains the original starting point through blocking, rework,
-and further verification. Preserve its evidence until acceptance so review
+and further verification. Preserve its evidence until acceptance or cancellation so review
 covers the entire item, not just the latest revision. If evidence is missing
 or the comparison is ambiguous, the Manager must resolve that limitation
 before accepting the item. A new work item receives a new baseline.
@@ -246,9 +273,10 @@ The Manager may:
 
 - accept the milestone;
 - authorise specific rework;
-- request additional verification.
+- request additional verification;
+- cancel the item using the procedure in section 4.1.
 
-The Implementer must not mark its own milestone accepted.
+The Implementer must not mark its own work item accepted or cancelled.
 
 ## 10. Repository state
 
@@ -257,6 +285,6 @@ The repository must contain enough persistent information for a fresh agent sess
 - what project this is;
 - what rules apply;
 - what work is currently authorised;
-- what has most recently been completed.
+- what has most recently been closed, and whether it was accepted or cancelled.
 
 Conversation history must not be required to reconstruct the current working state.

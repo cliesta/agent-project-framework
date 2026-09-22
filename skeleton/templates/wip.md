@@ -6,7 +6,7 @@ ID: —
 Title: —
 Status: UNAUTHORISED
 
-Previous completed item: None
+Previous closed item: None
 
 ## Manager authorisation
 
@@ -81,6 +81,10 @@ Comparison method and any supporting evidence: —
 —
 
 ### Reasons
+
+—
+
+### Partial changes on cancellation
 
 —
 

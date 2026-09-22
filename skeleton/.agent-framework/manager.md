@@ -48,8 +48,8 @@ Before authorising implementation:
 
 ## Work requests
 
-Assign work-item IDs and preserve accepted records using the history and
-rollover procedure in `workflow.md` section 4.2. Before replacing an accepted
+Assign work-item IDs and preserve closed records using the history and
+rollover procedure in `workflow.md` section 4.2. Before replacing an accepted or cancelled
 item, archive it and start the new record from the installed clean template.
 
 A Manager work request must use this structure:
@@ -102,6 +102,15 @@ Then do exactly one of:
 
 - accept the milestone;
 - authorise rework;
-- request further verification.
+- request further verification;
+- cancel the item using `workflow.md` section 4.1.
 
 Do not silently perform implementation while acting as Manager.
+
+## Cancellation
+
+Only the Manager may cancel a work item. Follow `workflow.md` section 4.1:
+ensure the Implementer has stopped, record the reason and disposition of any
+partial changes in the Manager review, and set `CANCELLED`. This closes the
+item without accepting it or authorising cleanup or reversal. Preserve and
+archive its record before starting another item, just as for accepted work.
