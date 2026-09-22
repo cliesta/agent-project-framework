@@ -37,7 +37,10 @@ authorised work if they do not prevent completion.
 
 ## Completion
 
-When the authorised work is complete, stop.
+When the authorised work is complete, stop implementation. Persist the report
+and `READY_FOR_REVIEW` status, then create the automatic handoff commit under
+`workflow.md` section 8.1 before handing control to the Manager. The same
+commit procedure applies when handing back a `BLOCKED` item.
 
 Do not begin another task.
 

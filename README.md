@@ -38,6 +38,25 @@ When the item is `READY_FOR_REVIEW`, return to the Manager for review. Handoff
 messages do not launch another agent; you must start or resume the appropriate
 session. The project status alone does not authorise implementation.
 
+## Handoff commits
+
+In Git projects, agents automatically create local commits at handoffs after
+updating `wip.md`. This includes authorisation, blocking, completion, rework,
+acceptance, and cancellation. Commit messages identify the work item, role,
+and status; handoff messages include the commit ID. A commit is a checkpoint,
+not acceptance of the work.
+
+Agents include only the outgoing role's changes and preserve unrelated or
+pre-existing changes. They do not push automatically. If a commit cannot be
+made safely or fails, the agent records the reason and explicitly hands off
+the uncommitted state. Projects without Git continue using file-based
+handoffs. Details are in `.agent-framework/workflow.md` section 8.1.
+
+To use this change in an existing installation, apply the updated `workflow.md`,
+`manager.md`, and `implementer.md` from `skeleton/.agent-framework/` to its
+`.agent-framework/` directory, preserving project-specific customisations.
+The installer does not update non-empty projects.
+
 ## Starting the next work item
 
 Before replacing an accepted or cancelled item, the Manager preserves its complete record

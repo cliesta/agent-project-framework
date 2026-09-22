@@ -107,6 +107,14 @@ Then do exactly one of:
 
 Do not silently perform implementation while acting as Manager.
 
+## Handoff commits
+
+Follow `workflow.md` section 8.1 to create a local Git commit after persisting
+each authorisation, rework or unblocking decision, acceptance, or cancellation.
+Commit the closed record before rollover. Manager commits cover planning,
+review, and history changes; they do not implicitly accept or commit leftover
+Implementer changes. Report any uncommitted changes at handoff.
+
 ## Cancellation
 
 Only the Manager may cancel a work item. Follow `workflow.md` section 4.1:

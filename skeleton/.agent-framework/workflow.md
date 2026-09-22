@@ -184,8 +184,9 @@ covers the entire item, not just the latest revision. If evidence is missing
 or the comparison is ambiguous, the Manager must resolve that limitation
 before accepting the item. A new work item receives a new baseline.
 
-This does not require a branch, a commit, or a clean working tree. Do not
-discard existing changes to create a baseline.
+Establishing the baseline does not require a branch, an existing commit, or a
+clean working tree. Handoff commits follow section 8.1 and do not replace or
+reset the original baseline. Do not discard existing changes to create one.
 
 ## 5. Every implementation request must contain
 
@@ -235,7 +236,8 @@ relevant instructions, report, or decision and the resulting status in
 `wip.md`.
 
 The handoff message must identify the work item, its status, and the role
-that should act next. A handoff does not itself launch another agent.
+that should act next, plus the handoff commit ID or the reason no commit was
+created. A handoff does not itself launch another agent.
 
 When authorised work is complete, the Implementer records a completion
 report summarising:
@@ -248,11 +250,63 @@ report summarising:
 - deviations from the authorised scope;
 - known limitations or unresolved issues.
 
-The Implementer then sets the status to `READY_FOR_REVIEW` and stops.
-Setting `BLOCKED` also ends the Implementer's current action.
+The Implementer then sets the status to `READY_FOR_REVIEW`, performs the
+handoff procedure in section 8.1, and stops. Setting `BLOCKED` ends further
+implementation; persist the blocker and perform the same handoff procedure.
 
-The Manager's current action ends only after it has fully persisted the review decision and any resulting authorisation changes and status transition required by the workflow.
+The Manager's current action ends only after it has fully persisted the review
+decision and any resulting authorisation changes and status transition, and
+performed the handoff procedure in section 8.1.
 Neither role continues into the other role's work.
+
+### 8.1. Automatic Git commits
+
+In projects using Git, the outgoing agent automatically creates a local commit
+after persisting each handoff, without asking for routine confirmation. This
+applies to Manager authorisation (including unblocking and rework), Implementer
+completion or blocking, and Manager acceptance or cancellation even when no
+next item is planned. Commit a closed item before rolling over to the next
+one so its closing state remains visible in Git history.
+
+These commits are workflow bookkeeping authorised for both roles. A commit
+does not mean the work is accepted: a `BLOCKED` commit may contain incomplete
+work, and a `READY_FOR_REVIEW` commit still requires Manager review.
+
+For each handoff:
+
+1. Persist the instructions, report, or decision and resulting status in
+   `wip.md` before staging changes.
+2. Inspect staged, unstaged, and untracked changes against the review baseline.
+   Include the outgoing role's changes since the previous handoff: the
+   Implementer includes authorised implementation and its work record; the
+   Manager includes its planning, review, and history changes. Do not sweep
+   unrelated files or pre-existing changes into the commit. Stage explicit
+   paths or hunks and inspect the proposed commit. Do not use blanket staging.
+3. Preserve unrelated staged changes as well as working-tree contents. Do not
+   commit someone else's staged changes or reset their index to make the
+   handoff easier. If changes overlap and cannot be safely separated, use the
+   exception procedure below instead of committing a mixed snapshot.
+4. Create a new commit with the work-item ID, outgoing role, and resulting
+   status in its message, for example `work-001: Implementer READY_FOR_REVIEW`.
+   Use the configured Git identity and normal hooks. Do not amend earlier
+   commits, bypass hooks, change Git configuration, or push as part of this
+   procedure. If the handoff is already fully committed, report the existing
+   commit rather than creating an empty one.
+5. Verify the commit contents and remaining repository changes. Include the
+   commit ID and any relevant uncommitted changes in the handoff message.
+   Do not write a commit's own ID into `wip.md` and create another commit just
+   to record that ID; Git history identifies the committed handoff.
+
+If the project does not use Git, continue the file-based handoff and say that
+no Git commit applies. Do not initialise a repository solely for this rule.
+
+If a commit cannot be made safely, or fails because of identity, hooks,
+permissions, or another error, preserve the work and record the reason in the
+outgoing role's section of `wip.md`. Hand control back with an explicit
+uncommitted-handoff notice and the action needed to resolve it; do not claim
+the commit succeeded. Keep the work-item status that describes the actual
+work outcome. A commit failure alone does not grant permission to change
+another role's status, fix unrelated infrastructure, or broaden the task.
 
 ## 9. Acceptance
 
