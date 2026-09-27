@@ -85,3 +85,59 @@ python3 tests/test_bootstrap.py
 The tests require Bash and Python 3, with no third-party packages. They install
 into temporary directories, verify the installed payload and clean WIP
 template, and check that rejected installations preserve existing contents.
+
+## Goal alignment and investigations
+
+Every project defines completion evidence, non-goals, and constraints in
+`project.md`. Its outcome (`ONGOING`, `SATISFIED`, or `STOPPED`) is separate
+from its initialization status. Every work item links to a goal and explains
+why it is needed now. The Manager reviews project progress separately from
+whether the work item was carried out correctly, and finishes once agreed
+completion evidence is sufficient.
+
+Planning is proportional to the item. Delivery work such as adding a specified
+CSV export needs scope, acceptance criteria, and verification; it does not need
+an approach portfolio. An investigation such as deciding which storage design
+can meet a latency target additionally needs a decision question, expected
+evidence, actions for positive/negative/inconclusive results, an observable
+budget, and stopping rules. A project can use both kinds of work item.
+
+At the first investigation, the Manager creates `strategy.md` from
+`.agent-framework/templates/strategy.md`. It tracks alternatives, evidence,
+cumulative budgets, choices, and reopening conditions. The Manager screens a
+bounded set of plausible alternatives before investing deeply, or records why
+existing evidence justifies focusing on one. Further experiments must justify
+their value relative to alternatives and concluding now. New work-item IDs and
+rework do not reset exploration budgets.
+
+A negative experiment can be accepted while its approach is rejected. An
+inconclusive experiment does not automatically earn another run. Newly found
+avenues are triaged, not automatically added to the project's obligations.
+For delivery, exhausted resources with unmet requirements mean reporting the
+shortfall and seeking a user decision, not relaxing the definition of success.
+Normative rules are in `workflow.md` sections 5.1 and 9.1.
+
+### Applying these changes to an existing installation
+
+The installer still refuses non-empty directories. Merge the updated
+`skeleton/AGENTS.md` and the workflow, Manager, and Implementer instructions
+under `skeleton/.agent-framework/` into the installation, preserving local
+customisations. Update `.agent-framework/templates/wip.md` from
+`skeleton/templates/wip.md` and install `skeleton/templates/strategy.md` at
+`.agent-framework/templates/strategy.md`.
+
+Have the Manager merge the new goal/completion/constraint/outcome/revision
+sections from `skeleton/templates/project.md` into the existing `project.md`;
+do not overwrite project content. Preserve active WIP records and immutable
+archives. At the next Manager handoff, with the Implementer stopped, add the
+new WIP planning/review fields and reconcile investigation evidence and usage
+from existing records. Unknown prior usage must be marked unknown and resolved
+or conservatively accounted for before further budget is authorised; installing
+a template does not reset it. Delivery-only projects need no `strategy.md`.
+
+## Workflow validation
+
+[Worked scenarios](tests/workflow-scenarios.md) describe expected behaviour for
+bounded delivery, investigations, budget exhaustion, switching, and completion.
+Use them for manual walkthroughs against an installed payload. Installer tests
+check packaging, not agent adherence to these behavioural rules.

@@ -24,5 +24,6 @@ cp "$root/skeleton/templates/project.md" "$target/project.md"
 cp "$root/skeleton/templates/project-rules.md" "$target/project-rules.md"
 cp "$root/skeleton/templates/wip.md" "$target/wip.md"
 cp "$root/skeleton/templates/wip.md" "$target/.agent-framework/templates/wip.md"
+cp "$root/skeleton/templates/strategy.md" "$target/.agent-framework/templates/strategy.md"
 
 echo "Installed agent framework into: $target"

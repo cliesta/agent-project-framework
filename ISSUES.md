@@ -1,7 +1,7 @@
 # Deferred Issues
 
-Recorded following the repository review on 2026-09-22. All items below are
-deferred; this list does not authorise implementation or change the installed
+Recorded following the repository review on 2026-09-22, with subsequent
+progress noted below. Unless marked addressed, items remain deferred; this list does not authorise implementation or change the installed
 workflow. It tracks framework development, not work items in projects that
 install the framework.
 
@@ -43,6 +43,12 @@ packaging and documentation need attention before broad distribution.
 
 ### ISSUE-003: Unresolved discoveries have no defined follow-up destination
 
+- **Update (2026-09-27): Addressed by disposition rules.** Workflow section 9.1
+  now requires scheduling, deferral with a reopening condition, or dismissal.
+  Investigation follow-ups persist in `strategy.md`; delivery follow-ups may
+  remain in closed records. Entries are candidates, not automatic obligations.
+  The original finding follows for context.
+
 - **Gap:** Implementers must report unrelated discoveries, but rollover clears
   the active record without requiring the Manager to triage those discoveries.
   They remain in archives but may never receive further attention.
@@ -54,6 +60,12 @@ packaging and documentation need attention before broad distribution.
 ## Medium priority: validation and operational defects
 
 ### ISSUE-004: Validation covers installation rather than workflow usability
+
+- **Update (2026-09-27): Partially addressed.**
+  [Worked scenarios](tests/workflow-scenarios.md) now cover goal convergence,
+  bounded delivery, and investigation stopping decisions. These are manual
+  scenarios, not live-agent evaluations; recovery scenarios and automated
+  structural validation remain deferred.
 
 - **Gap:** The 10 installer regression tests passed at review time, but they
   verify copying and rejection behaviour rather than the main workflow. Exact

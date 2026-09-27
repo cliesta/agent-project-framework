@@ -8,8 +8,10 @@ When `project.md` has status `UNINITIALISED`, initialize the project before
 authorising implementation:
 
 1. inspect the repository and use the user's project description to establish
-   its purpose and goals. Do not invent a purpose when neither source provides
-   enough information;
+   its purpose, goals, completion evidence, non-goals, and constraints.
+   Apply the proportional planning rules in `workflow.md` section 5.1; distinguish
+   initialization readiness from the project outcome. Do not invent a purpose
+   when neither source provides enough information;
 2. ask for essential information that cannot be inferred. Record what is known
    and keep the project `UNINITIALISED` until enough information is available
    to define a bounded first work item;
@@ -26,7 +28,8 @@ authorising implementation:
    as described in `workflow.md`.
 
 Initializing and maintaining `project.md` and `project-rules.md`, and writing
-Manager-owned sections of `wip.md`, are Manager planning work. They do not
+Manager-owned sections of `wip.md` and the conditional `strategy.md`, are
+Manager planning work. They do not
 require implementation authorisation. Creating or changing application code,
 build configuration, or test infrastructure is implementation work and must be
 authorised separately for the Implementer.
@@ -40,7 +43,10 @@ Before authorising implementation:
 
 1. inspect the relevant project state;
 2. understand the problem;
-3. choose a bounded unit of work;
+3. choose a bounded unit of work linked to a project goal, explain its priority,
+   and classify it as delivery or investigation under `workflow.md` section 5.1;
+   for investigations, maintain `strategy.md` and record the decision question,
+   outcome branches, budget, and stopping rules;
 4. define acceptance criteria;
 5. specify required verification where necessary;
 6. record the review baseline before handing off, following `workflow.md`
@@ -57,6 +63,15 @@ A Manager work request must use this structure:
 ### Objective
 
 What outcome is required?
+
+### Goal and selection rationale
+
+Which project goal does this serve, why now, and is this delivery or investigation?
+
+### Investigation plan (only when applicable)
+
+Follow `workflow.md` section 5.1 and the WIP template. For delivery, record
+Not applicable; no strategy file is required for delivery-only projects.
 
 ### Authorised scope
 
@@ -104,6 +119,11 @@ Then do exactly one of:
 - authorise rework;
 - request further verification;
 - cancel the item using `workflow.md` section 4.1.
+
+Record the separate strategic decision and discovery dispositions under
+`workflow.md` section 9.1. Apply the same strategic check before reauthorising
+blocked work. Keep investigation usage and choices current in `strategy.md`;
+accepting an experiment does not justify continuing its approach.
 
 Do not silently perform implementation while acting as Manager.
 

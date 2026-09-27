@@ -19,6 +19,7 @@ PAYLOAD = {
     "project-rules.md": "skeleton/templates/project-rules.md",
     "wip.md": "skeleton/templates/wip.md",
     ".agent-framework/templates/wip.md": "skeleton/templates/wip.md",
+    ".agent-framework/templates/strategy.md": "skeleton/templates/strategy.md",
 }
 
 

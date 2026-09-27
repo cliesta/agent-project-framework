@@ -32,6 +32,7 @@ Before doing work, read:
 3. `project.md`
 4. `project-rules.md`
 5. `wip.md`
+6. `strategy.md`, when present (investigation choices and cumulative budgets)
 
 ## Current work
 

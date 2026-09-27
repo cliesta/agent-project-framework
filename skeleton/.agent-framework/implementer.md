@@ -18,13 +18,20 @@ baseline during rework. If the baseline is missing or cannot support that
 comparison, record the issue in `wip.md`, set `BLOCKED`, and return control to
 the Manager before making implementation changes.
 
+For investigation items, check the decision question, outcome branches, budget,
+and stopping rules under `workflow.md` section 5.1 before starting. Missing or
+contradictory required instructions require `BLOCKED`, not invented limits.
+
 ## During implementation
 
 - stay within scope;
 - make the smallest coherent change that satisfies the objective;
 - avoid unrelated cleanup;
 - preserve existing behaviour unless change is authorised;
-- run appropriate verification.
+- run appropriate verification;
+- for investigations, track observable budget use and stop at the authorised
+  limit or early stopping rule, following `workflow.md` section 5.1. Report
+  negative and inconclusive evidence without expanding the search.
 
 Perform newly discovered work only when it is clearly necessary to complete
 the task and remains within the authorised scope. If necessary work would
@@ -63,6 +70,11 @@ What was run or checked?
 ### Results
 
 What passed or failed?
+
+### Investigation evidence (only when applicable)
+
+Report observations, uncertainty, evidence references, budget consumed, and
+which stopping condition was reached. For delivery, record Not applicable.
 
 ### Deviations
 

@@ -25,6 +25,7 @@ Only the Manager may authorise new implementation work.
 The Manager owns initialization and maintenance of `project.md` and
 `project-rules.md`. This and the Manager-owned portions of `wip.md` are planning
 work, not implementation, and do not require implementation authorisation.
+The Manager also owns `strategy.md` when investigation requires it (section 5.1).
 Follow the initialization procedure in `manager.md` before authorising the
 first work item. Project status `INITIALISED` does not replace work-item
 authorisation in `wip.md`.
@@ -49,14 +50,16 @@ The Implementer must not:
 `wip.md` is the authoritative record of one active work item.
 
 The Manager owns the work item's objective, authorised scope, acceptance
-criteria, review baseline, authorisation, and review. The Implementer owns its progress,
+criteria, goal link, selection rationale, investigation plan when applicable,
+review baseline, authorisation, and review. The Implementer owns its progress,
 blockers, and completion report.
 
 The Implementer must not modify its own authorised scope or other
 Manager-owned instructions.
 
 Implementation may proceed only when the status is `AUTHORISED` and the
-recorded objective, scope, acceptance criteria, and review baseline are sufficiently complete
+recorded objective, scope, acceptance criteria, goal link, selection rationale,
+applicable investigation plan, and review baseline are sufficiently complete
 and non-contradictory to carry out the work. A status value alone does not
 authorise implementation.
 
@@ -192,12 +195,74 @@ reset the original baseline. Do not discard existing changes to create one.
 
 At minimum:
 
-- an objective;
+- an objective linked to a project goal, with a reason for choosing it now;
+- a delivery or investigation classification, based on the purpose of this item;
 - authorised scope;
 - acceptance criteria;
 - a review baseline.
 
 It should also contain explicit exclusions and required verification when these matter.
+
+### 5.1. Goal alignment and proportional planning
+
+Every project must define observable completion evidence for its goals,
+non-goals, fixed requirements, and relevant resource limits in `project.md`.
+Qualitative evidence is valid when a numerical target would be artificial.
+Keep initialization status separate from outcome status: `ONGOING`,
+`SATISFIED` (with evidence), or `STOPPED` (with unmet goals and reason).
+Preserve dated revisions and their reasons. The Manager must not silently
+relax user requirements or extend user-set limits; return to the user when
+those constraints need to change. No implementation is authorised while
+awaiting that decision.
+
+Classify each item by purpose. A delivery item fulfils known requirements;
+an investigation item resolves uncertainty needed for a project decision.
+One project may contain both. Routine delivery needs no approach portfolio
+or investigation budget. Verification of known requirements alone does not
+make an item an investigation.
+
+Before authorising an investigation, the Manager records in `wip.md`:
+
+- the decision question, approach, and goal-relevant uncertainty;
+- evidence that would support or weaken the approach, and intended actions
+  for positive, negative, and inconclusive results;
+- an observable work budget (for example runs, configurations, or measured
+  compute usage), remaining cumulative allowance, and early stopping rules.
+
+Acceptance criteria assess the quality and completeness of the investigation,
+not whether its hypothesis wins. Use common evaluation conditions when
+comparing approaches, or record limitations that prevent a fair comparison.
+A valid negative or inconclusive result can
+be accepted without authorising further exploration.
+
+At the first investigation, create `strategy.md` from the installed
+`.agent-framework/templates/strategy.md`. Maintain it across work items;
+existing installations must install this template before using it. Keep
+approaches, evidence references, cumulative usage, current choice, and dated
+decisions there. Store detailed evidence in work records or linked artifacts.
+
+Use bounded breadth followed by evidence-earned depth: identify a small set
+of materially different plausible approaches and cheap initial probes before
+substantial investment. Set project-appropriate limits, not universal counts.
+The Manager may focus on one approach when constraints or existing evidence
+justify it, recording why. Before deepening, compare the next experiment's
+likely decision value and cost with an alternative probe and with concluding
+now. Novelty and sunk effort alone do not justify continuation.
+
+Budget use accumulates across IDs, rework, and switches. Reserve capacity for
+synthesis. At budget exhaustion, repeated results that do not change the
+decision, or failure of a critical assumption, reassess the approach before
+further authorisation. Record extensions with new evidence or a concrete
+reason the next probe will resolve the uncertainty, retaining old limits and
+usage. Manager allocations may change within user-set constraints; exceeding
+those constraints requires a user decision.
+
+When an investigation reaches its budget or stopping rule, the Implementer
+stops experiments and reports evidence, uncertainty, and usage. Set
+`READY_FOR_REVIEW` if the authorised reporting and completion criteria are met,
+including an allowed inconclusive outcome. Otherwise set `BLOCKED` and explain
+what remains unmet. Do not extend the budget, choose a new approach, or treat
+an exhausted budget as successful delivery.
 
 ## 6. Scope discipline
 
@@ -330,6 +395,40 @@ The Manager may:
 - request additional verification;
 - cancel the item using the procedure in section 4.1.
 
+### 9.1. Strategic review and completion
+
+At acceptance or cancellation, and before reauthorising blocked work or rework,
+the Manager records a strategic decision separately from the work-item verdict:
+continue delivery, deepen, switch, synthesise, finish, or return to the user
+for a scope/resource decision. Preserve prior strategic decisions and their reasons
+in the current record when rework or unblocking requires another review.
+State what changed toward the project goal,
+what completion evidence remains missing, and why more work is warranted.
+For routine delivery this may be a brief statement of the next unmet requirement.
+Acceptance of an experiment does not endorse its approach.
+
+Update `strategy.md` when relevant, including usage from cancelled or blocked
+items. Reconcile cumulative usage before granting more work. Give each discovery
+a disposition: schedule, defer with a reopening condition, or dismiss with a
+reason. Preserve deferred investigation discoveries in `strategy.md`; delivery
+follow-ups may remain in the closed record with a reference from any later
+item. Discoveries are candidates, not automatic obligations. Reopening a parked
+or rejected approach requires evidence that its recorded condition has changed.
+
+When agreed completion evidence is sufficient, mark the project outcome
+`SATISFIED` with evidence references and finish; unanswered nonessential questions
+do not require more work. If requirements remain unmet when resources run out,
+record the shortfall and return to the user for a decision. Do not mark success
+or weaken acceptance criteria to fit the budget. Record `STOPPED` when stopping
+under an agreed limit or user decision, preserving unmet goals and reasons.
+A later user-approved resumption must preserve that history.
+
+Strategic decisions do not change lifecycle permissions: close and archive the
+current item before a new one, authorise any synthesis implementation explicitly,
+and never replace an unfinished item to switch approaches. The Manager may
+summarise existing evidence as planning; new experiments, code, or verification
+remain Implementer work requiring authorisation.
+
 The Implementer must not mark its own work item accepted or cancelled.
 
 ## 10. Repository state
@@ -338,6 +437,9 @@ The repository must contain enough persistent information for a fresh agent sess
 
 - what project this is;
 - what rules apply;
+- what evidence completes the project and what remains unmet;
+- why the current approach was selected and, for investigations, its evidence
+  and remaining cumulative budget;
 - what work is currently authorised;
 - what has most recently been closed, and whether it was accepted or cancelled.
 
